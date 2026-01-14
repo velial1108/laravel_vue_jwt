@@ -7,7 +7,11 @@ export default {
             email: null,
             password: null,
             password_confirmation: null,
+            access_token:null,
         }
+    },
+    mounted(){
+        console.log(this.access_token = localStorage.getItem('access_token'));
     },
     methods:{
         store(){
