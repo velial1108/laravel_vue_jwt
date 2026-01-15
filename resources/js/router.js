@@ -17,6 +17,11 @@ const routes = [
         name: 'user.registration',
         component: () => import('./components/User/Registration.vue') // ← Заглавная I!
     },
+    {
+        path: '/user/personal',
+        name: 'user.personal',
+        component: () => import('./components/User/Personal.vue') // ← Заглавная I!
+    },
 ]
 
 const router = createRouter({
