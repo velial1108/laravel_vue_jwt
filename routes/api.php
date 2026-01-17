@@ -33,7 +33,7 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-    Route::group(['middleware' => ['auth:api']], function()
+    Route::group(['middleware' => ['jwt.auth']], function()
     {
         Route::prefix('fruits')->group(function () {
             Route::get('/', IndexController::class); // ← Ключевое исправление!
