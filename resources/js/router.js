@@ -50,7 +50,7 @@ router.beforeEach((to, from, next) => {
         }
     }
     //если залогинен и лезет на строницу логин отправляем обратно
-    if (to.name === 'user.login' && accessToken) {
+    if (to.name === 'user.login' || to.name === 'user.registration' && accessToken) {
         return next({
             name: 'user.personal'
         })

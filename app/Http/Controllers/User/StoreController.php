@@ -15,19 +15,10 @@ class StoreController extends Controller
 
         // Явно хешируем пароль — надёжнее, чем полагаться на кастинг
         $data['password'] = Hash::make($data['password']);
-
-        $user = User::firstOrCreate(
-            ['email' => $data['email']],
-            $data
-        );
-
-        return response()->json([
-            'message' => $user->wasRecentlyCreated ? 'User created' : 'User already exists',
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ]
-        ], $user->wasRecentlyCreated ? 201 : 200);
+        $user = User::where('email', $data['email'])->first();
+        if($user) return response(['error' => 'User already exists.'], 409);
+        $user = User::create($data);
+        $token = auth()->tokenById($user->id);
+        return response(['access_token' => $token]);
     }
 }
